@@ -5,7 +5,7 @@ Handles scoring for a standard 10-pin bowling game.
 
 
 class BowlingGame:
-    """bowling game and calculates score."""
+    """Represents a bowling game and calculates scores based on standard rules."""
 
     def __init__(self):
         self.rolls = []
@@ -47,15 +47,19 @@ class BowlingGame:
         return score
 
     def _is_strike(self, i):
-        return i < len(self.rolls) and self.rolls[i] == 10
+         """Return True if the roll is a strike."""
+         return i < len(self.rolls) and self.rolls[i] == 10
+    
 
     def _is_spare(self, i):
+        """Return True if the rolls form a spare."""
         return (
             i + 1 < len(self.rolls)
             and self.rolls[i] + self.rolls[i + 1] == 10
         )
 
     def _strike_bonus(self, i):
+        """Calculate bonus for a strike."""
         bonus = 0
         if i + 1 < len(self.rolls):
             bonus += self.rolls[i + 1]
@@ -64,11 +68,13 @@ class BowlingGame:
         return bonus
 
     def _spare_bonus(self, i):
+        """Calculate bonus for a spare."""
         if i + 2 < len(self.rolls):
             return self.rolls[i + 2]
         return 0
 
     def _sum_of_frame(self, i):
+        """Calculate score for a normal frame."""
         if i + 1 < len(self.rolls):
             return self.rolls[i] + self.rolls[i + 1]
         return self.rolls[i]
