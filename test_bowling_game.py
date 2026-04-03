@@ -6,6 +6,7 @@ class TestBowlingGame(unittest.TestCase):
     """Unit tests for BowlingGame."""
 
     def setUp(self):
+        """Initialize a new BowlingGame before each test."""
         self.game = BowlingGame()
 
     def roll_many(self, n, pins):
@@ -22,7 +23,7 @@ class TestBowlingGame(unittest.TestCase):
     def test_gutter_game(self):
         self.roll_many(20, 0)
         self.assertEqual(self.game.score(), 0)
-
+     
     def test_score_all_ones(self):
         self.roll_many(20, 1)
         self.assertEqual(self.game.score(), 20)
@@ -89,7 +90,14 @@ class TestBowlingGame(unittest.TestCase):
         self.roll_many(20, 0)
         self.game.roll(0)
         self.assertGreaterEqual(self.game.score(), 0)
-
+        
+    def test_zero_then_strike(self):
+     """Test mix of zero and strike rolls."""
+     self.game.roll(0)
+     self.game.roll(10)
+     self.roll_many(16, 0)
+     self.assertGreaterEqual(self.game.score(), 10)
+ 
 
 if __name__ == "__main__":
     unittest.main()
